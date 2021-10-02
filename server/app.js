@@ -9,7 +9,6 @@ const helmet = require('helmet');
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
-const expiryDate = new Date(Date.now() + 60 * 60 * 1000);
 
 app.use(helmet());
 
@@ -34,7 +33,7 @@ app.use(session({
   saveUninitialized: false,
   store: sessionStore,
   cookie: {
-    expires: expiryDate,
+    expires: new Date(Date.now() + 60 * 60 * 1000),
     httpOnly: true,
   },
 }));

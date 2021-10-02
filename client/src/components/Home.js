@@ -5,7 +5,7 @@ import qs from 'query-string';
 import Pagination from '../api/Pagination';
 import GetTotalPage from '../api/GetTotalPage';
 
-const Userlist = styled.ul`height: 950px;`;
+const Userlist = styled.ul``;
 const User = styled.li`float: left; width: 270px; height: 160px; margin: 20px; border: 2px solid #dbdbdb; border-radius: 10px;`;
 const Top = styled.div`padding: 0 10px; line-height: 39px; height: 39px;`;
 const Sex = styled.span`margin-right: 10px; font-size: 14px; font-weight: bold; color: gray;`;
@@ -24,7 +24,7 @@ const Home = ({ location }) => {
     page = Number(qs.parse(location.search).page);
   }
   const limit = 12;
-  const url = '/home?page=';
+  const url = '/?page=';
   const [user, setUser] = useState([]);
   const [auth, setAuth] = useState(null);
   const [totalpage, setTotalpage] = useState(null);
@@ -38,11 +38,11 @@ const Home = ({ location }) => {
         setAuth('no');
       } else {
         setUser(user.filter((userinfo) => userinfo.id === -1).concat(res.data));
+        GetTotalPage(limit).then((total) => setTotalpage(total));
       }
     }).catch((err) => {
       alert(err);
     });
-    GetTotalPage(limit).then((res) => setTotalpage(res));
   }, [page]);
 
   const req = (id) => {

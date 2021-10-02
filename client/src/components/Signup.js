@@ -4,7 +4,10 @@ import axios from 'axios';
 
 const Signupwrap = styled.div`width: 300px; margin: 0 auto;`;
 
-const Title = styled.p`font-size: 20px; font-weight: bold; text-align: center; border: 1px solid #dbdbdb; padding: 10px; margin: 100px 0 20px 0; background: #0080ff; color: #fff; `;
+const Privacydiv = styled.div`display: flex; justify-content: space-between;`;
+const Privacy = styled.span`font-size: 14px; color: gray; font-weight: bold; cursor: pointer;`;
+
+const Title = styled.p`font-size: 20px; font-weight: bold; text-align: center; border: 1px solid #dbdbdb; padding: 10px; margin: 10px 0 20px 0; background: #0080ff; color: #fff; `;
 
 const Input = styled.input`width: 100%; height: 50px; font-size: 17px; padding: 0 10px; border: 1px solid #dbdbdb; margin-bottom : -1px;`;
 const Checkpwd = styled.p`width: 100%; hegiht: 30px; font-size: 12px; padding: 3px 10px;`;
@@ -111,7 +114,7 @@ const Signup = (props) => {
           if (res.data === 'pwdtesterr') {
             alert('안전하지 못한 비밀번호');
           } else if (res.data === 'ok') {
-            props.history.push('/home?page=1');
+            props.history.push('/?page=1');
           } else if (res.data === 'user_iderr') {
             alert('아이디중복입니다');
             document.getElementById('name').focus();
@@ -186,6 +189,10 @@ const Signup = (props) => {
 
   return (
     <Signupwrap>
+      <Privacydiv>
+        <Privacy onClick={() => props.history.push('/PersonalInfoAgree')}>개인정보수집이용동의서</Privacy>
+        <Privacy onClick={() => props.history.push('/PrivacyPolicy')}>개인정보처리방침</Privacy>
+      </Privacydiv>
       <Title>회원가입</Title>
       <Input type="text" id="nickname" name="nickname" placeholder="닉네임" maxLength="5" onChange={getvalue} />
       <br />
@@ -222,7 +229,7 @@ const Signup = (props) => {
         <Inputmail type="number" onChange={getauth} onInput={handleOnInput(6)} placeholder="123456" />
         <Mailbtn onClick={checkAuth}>인증 확인</Mailbtn>
       </Maildiv>
-      <Submitbtn onClick={signup}>회원가입</Submitbtn>
+      <Submitbtn onClick={signup}>약관을 동의하며 회원가입</Submitbtn>
     </Signupwrap>
   );
 };

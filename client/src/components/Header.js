@@ -55,7 +55,7 @@ const Header = (props) => {
         password: login.password,
       },
     }).then((res) => {
-      props.history.push('/home?page=1');
+      props.history.push('/?page=1');
       window.location.reload();
     }).catch((err) => {
       alert('회원정보가 맞지않습니다');
@@ -79,7 +79,7 @@ const Header = (props) => {
         method: 'get',
         url: `${process.env.REACT_APP_SERVER_HOST}/withdrawal`,
       }).then((res) => {
-        props.history.push('/home?page=1');
+        props.history.push('/?page=1');
         window.location.reload();
       });
     }
@@ -88,7 +88,7 @@ const Header = (props) => {
   return (
     <>
       <Headerwrap>
-        <Logo onClick={() => props.history.push('/home?page=1')}>ㅅㄷㄴㅅ</Logo>
+        <Logo onClick={() => props.history.push('/?page=1')}>항붕이</Logo>
         {user === 'noauth' ? <Signup onClick={() => props.history.push('/signup')}>회원가입</Signup>
           : null}
       </Headerwrap>

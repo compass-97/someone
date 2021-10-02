@@ -6,6 +6,8 @@ import Signup from './components/Signup';
 import Header from './components/Header';
 import List from './components/List';
 import Footer from './components/Footer';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import PersonalInfoAgree from './components/PersonalInfoAgree';
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -35,6 +37,7 @@ const ContainerHeader = styled.div`
 `;
 const ContainerHome = styled.div`
   width: 960px;
+  height: 950px;
   margin: 0 auto;
 `;
 const ContainerFooter = styled.div`
@@ -53,9 +56,11 @@ function App() {
 
       <ContainerHome>
         <Switch>
-          <Route path="/home" exact component={Home} />
+          <Route path="/" exact component={Home} />
           <Route path="/signup" component={Signup} />
           <Route path="/list" component={List} />
+          <Route path="/PrivacyPolicy" component={PrivacyPolicy} />
+          <Route path="/PersonalInfoAgree" component={PersonalInfoAgree} />
         </Switch>
       </ContainerHome>
       {/* main */}
