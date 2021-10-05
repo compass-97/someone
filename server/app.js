@@ -26,8 +26,9 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
-  name: 'Dontdoanythingbad',
+  name: 'sessionid',
   httpOnly: true,
+  secure: true,
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
@@ -35,10 +36,11 @@ app.use(session({
   cookie: {
     expires: new Date(Date.now() + 60 * 60 * 1000),
     httpOnly: true,
+    secure: true,
   },
 }));
 
-app.use('/', require('./routes/index'));
+app.use('/api', require('./routes/index'));
 
 app.listen(PORT, () => {
   console.log(PORT, 'CONNECTED');

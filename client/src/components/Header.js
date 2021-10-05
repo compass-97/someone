@@ -88,7 +88,7 @@ const Header = (props) => {
   return (
     <>
       <Headerwrap>
-        <Logo onClick={() => props.history.push('/?page=1')}>항붕이</Logo>
+        <Logo onClick={() => props.history.push('/?page=1')}>test</Logo>
         {user === 'noauth' ? <Signup onClick={() => props.history.push('/signup')}>회원가입</Signup>
           : null}
       </Headerwrap>
