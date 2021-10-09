@@ -5,16 +5,16 @@ import qs from 'query-string';
 import Pagination from '../api/Pagination';
 import GetTotalPage from '../api/GetTotalPage';
 
-const Userlist = styled.ul``;
-const User = styled.li`float: left; width: 270px; height: 160px; margin: 20px; border: 2px solid #dbdbdb; border-radius: 10px;`;
-const Top = styled.div`padding: 0 10px; line-height: 39px; height: 39px;`;
-const Sex = styled.span`margin-right: 10px; font-size: 14px; font-weight: bold; color: gray;`;
-const Nickname = styled.span`margin-right: 10px; font-weight: bold; font-size: 17px;`;
-const Age = styled.span`margin-right: 10px; color: gray;`;
-const Height = styled.span`color: gray;`;
+const Userlist = styled.ul`height: 900px; border: 1px solid #dbdbdb; padding: 10px; margin-bottom: 20px;`;
+const User = styled.li`float: left; width: 270px; height: 160px; margin: 20px 20px 20px 0; border: 1px solid #dbdbdb; &:last-child {margin-right: 0;}`;
+const Top = styled.div`padding: 0 10px; line-height: 39px; height: 39px; border-bottom: 1px solid #dbdbdb;`;
+const Sex = styled.span`margin-right: 10px; font-size: 14px; font-weight: bold; color: #fff; background: #0080ff; padding: 2px 5px; border-radius: 10px;`;
+const Nickname = styled.span`margin-right: 10px; font-weight: bold; font-size: 18px;`;
+const Age = styled.span`margin-right: 10px; color: gray; font-size: 14px;`;
+const Height = styled.span`color: gray; font-size: 14px;`;
 const Mid = styled.div`padding: 0 10px 0 20px; line-height: 70px; height: 70px;`;
 const Bottom = styled.div`padding: 0 10px; line-height: 49px; height: 49px;`;
-const Btn = styled.button`border: none; background: none; cursor: pointer; padding: 5px 7px; margin-left: 175px; border: 1px solid #dbdbdb; border-radius: 10px; &:hover {background: #0080ff; color: #fff; font-weight: bold;}`;
+const Btn = styled.button`font-weight: bold; border: none; background: none; cursor: pointer; padding: 5px 7px; margin-left: 175px; border: 1px solid #dbdbdb; border-radius: 10px; &:hover {background: #0080ff; color: #fff; font-weight: bold;}`;
 
 const Home = ({ location }) => {
   let page;

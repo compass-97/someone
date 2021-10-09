@@ -6,12 +6,12 @@ const Listlike = styled.div``;
 const Title = styled.p`font-size: 17px; font-weight: bold; border-bottom: 2px solid #dbdbdb; padding-bottom: 10px;`;
 
 const Userlist = styled.ul`margin-bottom: 20px;`;
-const User = styled.li`float: left; width: 270px; height: 160px; margin: 20px; border: 2px solid #dbdbdb; border-radius: 10px;`;
+const User = styled.li`float: left; width: 270px; height: 160px; margin: 20px 20px 20px 0; border: 1px solid #dbdbdb; &:last-child {margin-right: 0;}`;
 const Top = styled.div`padding: 0 10px; line-height: 39px; height: 39px;`;
-const Sex = styled.span`margin-right: 10px; font-size: 14px; font-weight: bold; color: gray;`;
-const Nickname = styled.span`margin-right: 10px; font-weight: bold; font-size: 17px;`;
-const Age = styled.span`margin-right: 10px; color: gray;`;
-const Height = styled.span`color: gray;`;
+const Sex = styled.span`margin-right: 10px; font-size: 14px; font-weight: bold; color: #fff; background: #0080ff; padding: 2px 5px; border-radius: 10px;`;
+const Nickname = styled.span`margin-right: 10px; font-weight: bold; font-size: 18px;`;
+const Age = styled.span`margin-right: 10px; color: gray; font-size: 14px;`;
+const Height = styled.span`color: gray; font-size: 14px;`;
 const Mid = styled.div`padding: 0 10px 0 20px; height: 70px; line-height: 70px;`;
 const Kakaobtn = styled.button`border: 1px solid #dbdbdb; border-radius: 10px; background: none; padding: 5px 10px; font-weight: bold; font-size: 17px; cursor: pointer; transition: all .2s ease; &:hover {background: #0080ff; color: #fff; font-weight: bold;}`;
 const Kakao = styled.p`padding: 5px 10px; font-weight: bold; font-size: 17px;`;
