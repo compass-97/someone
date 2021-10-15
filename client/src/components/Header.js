@@ -13,6 +13,7 @@ const Loginbtn = styled.button`position: absolute; top: 0; left: 400px; width: 7
 
 const Username = styled.span`height: 30px; margin-left: 30px; font-size: 20px; font-weight: bold;`;
 const Userlike = styled.button`width: 50px; margin-left: 20px; height: 30px; font-size: 15px; border: none; background: none; cursor: pointer; transition: all .1s ease; &:hover {color: #0080ff;}`;
+const Useredit = styled.button`position: absolute; top: 0; right: 160px; width: 80px; height: 30px; font-size: 15px; border: none; border-left: 1px solid #dbdbdb; background: none; cursor: pointer; transition: all .1s ease; &:hover { background: #0080ff; color: #fff; font-weight: bold;}`;
 const Withtbtn = styled.button`position: absolute; top: 0; right: 80px; width: 80px; height: 30px; font-size: 15px; border: none; border-left: 1px solid #dbdbdb; background: none; cursor: pointer; transition: all .1s ease; &:hover {background: #0080ff; color: #fff; font-weight: bold;}`;
 const Logoutbtn = styled.button`position: absolute; top: 0; right: 0; width: 80px; height: 30px; font-size: 15px;; border: none; border-left: 1px solid #dbdbdb; background: none; cursor: pointer; transition: all .1s ease; &:hover {background: #0080ff; color: #fff; font-weight: bold;}`;
 
@@ -21,7 +22,10 @@ const Header = (props) => {
     user_id: '',
     password: '',
   });
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    id: null,
+    nickname: null,
+  });
 
   useEffect(() => {
     axios({
@@ -29,9 +33,11 @@ const Header = (props) => {
       url: `${process.env.REACT_APP_SERVER_HOST}/auth`,
     }).then((res) => {
       if (res.data !== 'noauth') {
-        setUser(res.data.nickname);
-      } else {
-        setUser('noauth');
+        setUser({
+          ...user,
+          id: res.data.id,
+          nickname: res.data.nickname,
+        });
       }
     }).catch((err) => {
       alert(err);
@@ -85,15 +91,19 @@ const Header = (props) => {
     }
   };
 
+  const edit = () => {
+    console.log('hi');
+  };
+
   return (
     <>
       <Headerwrap>
         <Logo onClick={() => props.history.push('/?page=1')}>항붕이</Logo>
-        {user === 'noauth' ? <Signup onClick={() => props.history.push('/signup')}>회원가입</Signup>
+        {user.id === null ? <Signup onClick={() => props.history.push('/signup')}>회원가입</Signup>
           : null}
       </Headerwrap>
       <Userwrap>
-        {user === 'noauth'
+        {user.id === null
           ? (
             <>
               <Inputid type="text" name="user_id" placeholder="아이디" onChange={getvalue} />
@@ -103,8 +113,9 @@ const Header = (props) => {
           )
           : (
             <>
-              <Username>{user}</Username>
+              <Username>{user.nickname}</Username>
               <Userlike onClick={() => props.history.push('/list')}>목록</Userlike>
+              <Useredit onClick={() => props.history.push(`/userinfo/${user.id}`)}>내정보</Useredit>
               <Withtbtn onClick={withdrawal}>회원탈퇴</Withtbtn>
               <Logoutbtn onClick={logout}>로그아웃</Logoutbtn>
             </>

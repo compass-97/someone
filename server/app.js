@@ -5,21 +5,13 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
-const csp = require('helmet-csp');
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
 
 app.use(helmet());
-app.use(csp({
-  useDefaults: true,
-  directives: {
-    defaultSrc: ["'self'", 'punco.shop'],
-    scriptSrc: ["'self'", 'punco.shop'],
-    imgSrc: ["'self'", 'punco.shop'],
-  },
-}));
+app.use(helmet.contentSecurityPolicy());
 
 const sessionStore = new MySQLStore({
   host: process.env.DB_HOST,
@@ -36,20 +28,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
   name: 'sessionid',
-  httpOnly: true,
   secret: process.env.SESSION_SECRET,
-  secure: true,
   resave: false,
   saveUninitialized: false,
   store: sessionStore,
+  proxy: process.env.SESSION_PROXY,
   cookie: {
-    expires: new Date(Date.now() + 60 * 60 * 1000),
     httpOnly: true,
-    secure: true,
+    secure: process.env.SESSION_SECURE,
   },
 }));
 
 app.use('/api', require('./routes/index'));
+app.use('/user', require('./routes/user'));
 
 app.listen(PORT, () => {
   console.log(PORT, 'CONNECTED');

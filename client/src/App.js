@@ -8,6 +8,8 @@ import List from './components/List';
 import Footer from './components/Footer';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import PersonalInfoAgree from './components/PersonalInfoAgree';
+import Userinfo from './components/user/Userinfo';
+import Useredit from './components/user/Useredit';
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -59,6 +61,8 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/signup" component={Signup} />
           <Route path="/list" component={List} />
+          <Route path="/useredit/:id" component={Useredit} />
+          <Route path="/userinfo/:id" component={Userinfo} />
           <Route path="/PrivacyPolicy" component={PrivacyPolicy} />
           <Route path="/PersonalInfoAgree" component={PersonalInfoAgree} />
         </Switch>

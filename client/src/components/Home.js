@@ -6,17 +6,19 @@ import Pagination from '../api/Pagination';
 import GetTotalPage from '../api/GetTotalPage';
 
 const Userlist = styled.ul`height: 900px; border: 1px solid #dbdbdb; padding: 10px; margin-bottom: 20px;`;
-const User = styled.li`float: left; width: 270px; height: 160px; margin: 20px 20px 20px 0; border: 1px solid #dbdbdb; &:last-child {margin-right: 0;}`;
-const Top = styled.div`padding: 0 10px; line-height: 39px; height: 39px; border-bottom: 1px solid #dbdbdb;`;
+const Userinfowrap = styled.div`display: flex; width: 450px; border: 1px solid #dbdbdb;`;
+const Thumbnail = styled.img`width: 100px; height: 100px;`;
+const Right = styled.div`width: 350px; height: 100px;`;
+const Righttop = styled.div`width: 350px; height: 30px; line-height: 30px;`;
 const Sex = styled.span`margin-right: 10px; font-size: 14px; font-weight: bold; color: #fff; background: #0080ff; padding: 2px 5px; border-radius: 10px;`;
-const Nickname = styled.span`margin-right: 10px; font-weight: bold; font-size: 18px;`;
+const Nickname = styled.span`margin-right: 10px; font-weight: bold; font-size: 18px; cursor: pointer;`;
 const Age = styled.span`margin-right: 10px; color: gray; font-size: 14px;`;
 const Height = styled.span`color: gray; font-size: 14px;`;
-const Mid = styled.div`padding: 0 10px 0 20px; line-height: 70px; height: 70px;`;
-const Bottom = styled.div`padding: 0 10px; line-height: 49px; height: 49px;`;
-const Btn = styled.button`font-weight: bold; border: none; background: none; cursor: pointer; padding: 5px 7px; margin-left: 175px; border: 1px solid #dbdbdb; border-radius: 10px; &:hover {background: #0080ff; color: #fff; font-weight: bold;}`;
+const Rightmain = styled.div`padding: 10px 0 5px 20px;`;
+const Bottom = styled.div`padding: 0 10px;`;
+const Btn = styled.button`font-weight: bold; border: none; background: none; cursor: pointer; padding: 5px 7px; margin-left: 255px; border: 1px solid #dbdbdb; border-radius: 10px; &:hover {background: #0080ff; color: #fff; font-weight: bold;}`;
 
-const Home = ({ location }) => {
+const Home = ({ history, location }) => {
   let page;
   if (!qs.parse(location.search).page) {
     page = 1;
@@ -77,16 +79,19 @@ const Home = ({ location }) => {
           <>
             <Userlist className="clearfix">
               {user.map((userinfo) => (
-                <User key={userinfo.id}>
-                  <Top>
-                    <Sex>{userinfo.sex === 'man' ? '남' : '여'}</Sex>
-                    <Nickname>{userinfo.nickname}</Nickname>
-                    <Age>{userinfo.age}</Age>
-                    <Height>{userinfo.height}</Height>
-                  </Top>
-                  <Mid>{userinfo.intro}</Mid>
-                  <Bottom><Btn onClick={() => req(userinfo.id)}>대화신청</Btn></Bottom>
-                </User>
+                <Userinfowrap>
+                  <Thumbnail src={userinfo.thumbnail} />
+                  <Right>
+                    <Righttop>
+                      <Sex>{userinfo.sex === 'man' ? '남' : '여'}</Sex>
+                      <Nickname onClick={() => history.push(`/userinfo/${userinfo.id}`)}>{userinfo.nickname}</Nickname>
+                      <Age>{userinfo.age}</Age>
+                      <Height>{userinfo.height}</Height>
+                    </Righttop>
+                    <Rightmain>{userinfo.intro}</Rightmain>
+                    <Bottom><Btn onClick={() => req(userinfo.id)}>대화신청</Btn></Bottom>
+                  </Right>
+                </Userinfowrap>
               ))}
             </Userlist>
             <div>

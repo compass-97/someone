@@ -127,7 +127,7 @@ router.get('/withdrawal', (req, res) => {
 router.get('/home', (req, res) => {
   let sex;
   const sqlGetsex = 'select sex from user where id = ?';
-  const sql = 'select id,sex,nickname,age,height,intro from user where sex = ? limit ?,?';
+  const sql = 'select thumbnail,id,sex,nickname,age,height,intro from user where sex = ? limit ?,?';
   const limit = req.query.limit * 1;
   const page = (req.query.page - 1) * limit;
   if (req.user) {
@@ -234,7 +234,7 @@ router.get('/listyes', (req, res) => {
         } else {
           someone = result[i].user;
         }
-        where += ` or ${someone}`;
+        where += ` or id = ${someone}`;
       }
       const sqlFromWhere = `select id,sex,nickname,age,height,intro from user where id = ${where}`;
       db.query(sqlFromWhere, (errSqlFromWhere, resultSqlFromWhere) => {
@@ -255,7 +255,7 @@ router.get('/listilike', (req, res) => {
     if (result.length > 0) {
       where += result[0].user_like;
       for (let i = 1; i < result.length; i++) {
-        where += ` or ${result[i].user_like}`;
+        where += ` or id = ${result[i].user_like}`;
       }
       const sql = `select id,sex,nickname,age,height,intro from user where id = ${where}`;
       db.query(sql, (errSql, resultSql) => {
@@ -277,7 +277,7 @@ router.get('/listsomeonelike', (req, res) => {
       if (result.length > 0) {
         where += result[0].user;
         for (let i = 1; i < result.length; i++) {
-          where += ` or ${result[i].user}`;
+          where += ` or id = ${result[i].user}`;
         }
         const sql = `select id,sex,nickname,age,height,intro from user where id = ${where}`;
         db.query(sql, (errSql, resultSql) => {
@@ -333,7 +333,7 @@ router.get('/logout', (req, res) => {
 
 router.get('/auth', (req, res) => {
   if (req.user) {
-    const sql = 'select nickname,sex from user where id  = ?';
+    const sql = 'select nickname,sex,id from user where id  = ?';
     db.query(sql, [req.user], (err, result) => {
       if (err) throw err;
       res.send(result[0]);

@@ -194,7 +194,7 @@ const Signup = (props) => {
         <Privacy onClick={() => props.history.push('/PrivacyPolicy')}>개인정보처리방침</Privacy>
       </Privacydiv>
       <Title>회원가입</Title>
-      <Input type="text" id="nickname" name="nickname" placeholder="닉네임" maxLength="5" onChange={getvalue} />
+      <Input type="text" id="nickname" name="nickname" placeholder="닉네임" maxLength="10" onChange={getvalue} />
       <br />
       <Input type="text" id="name" name="name" placeholder="아이디" maxLength="13" onChange={getvalue} />
       <br />
@@ -217,7 +217,7 @@ const Signup = (props) => {
         <Radio type="radio" id="woman" name="sex" />
         <Label htmlFor="woman" onClick={() => radio('woman')}>여자</Label>
       </Sex>
-      <Input type="text" id="intro" name="intro" placeholder="자기소개(10글자)" maxLength="10" onChange={getvalue} />
+      <Input type="text" id="intro" name="intro" placeholder="자기소개(20글자)" maxLength="20" onChange={getvalue} />
       <br />
       <Maildiv>
         <Inputmail type="text" onChange={getemail} placeholder="example@naver.com" />
